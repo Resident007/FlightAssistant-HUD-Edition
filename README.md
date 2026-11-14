@@ -76,7 +76,7 @@ The jar ends up in `versions/26.3-fabric/build/libs/`.
 
 ## Modrinth
 
-This fork planned to be published on Modrinth as a separate, unofficial project soon. It is not a replacement for the original mod, and its project page is independent of the original authors' pages.
+This fork is planned to be published on Modrinth as a separate, unofficial project soon. It is not a replacement for the original mod, and its project page is independent of the original authors' pages.
 
 ## Credits and license
 

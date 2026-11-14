@@ -33,11 +33,6 @@ stonecutter {
         fun mc(version: String, vararg loaders: String) {
             for (it in loaders) version("$version-$it", version)
         }
-        mc("1.20.1", "fabric", "forge")
-        mc("1.21.1", "fabric", "neoforge")
-        mc("1.21.6", "fabric")
-        mc("1.21.9", "fabric")
-        mc("1.21.11", "fabric")
         mc("26.3", "fabric")
 
         // 26.x ships without obfuscation, so it builds with the non-remapping Loom instead of Modstitch

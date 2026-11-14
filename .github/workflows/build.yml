@@ -32,10 +32,10 @@ jobs:
         uses: gradle/wrapper-validation-action@v2
 
       - name: Setup JDK ${{ matrix.java }}
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: ${{ matrix.java }}
-          distribution: 'microsoft'
+          distribution: 'temurin'
 
       - name: Make Gradle wrapper executable
         run: chmod +x ./gradlew

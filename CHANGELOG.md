@@ -1,5 +1,13 @@
 Please report bugs on [GitHub](https://github.com/Resident007/FlightAssistant-HUD-Edition/issues). This is an unofficial fork, so please don't report its problems to the original FlightAssistant projects.
 
+## Changes in 3.2.1
+
+Release metadata and build fixes. No gameplay or HUD behaviour changed.
+
+- Fixed the CI build: removed the leftover version nodes whose configuration files were deleted, and pinned the workflow to Temurin JDK 27 (Microsoft's build has no JDK 27)
+- Project icon is now 512×512
+- Declared `java >=25` in the mod metadata, matching the compiled class version
+
 ## Changes in 3.2.0
 
 First release of FlightAssistant HUD Edition, a read-only fork for servers that do not allow flight automation.
