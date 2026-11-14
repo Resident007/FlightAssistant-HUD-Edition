@@ -28,19 +28,19 @@ alert.flightassistant:
       .: HUD
       data: ОТКАЗ ДАНН ИНД
       reset: ' -ИНДИК: ВЫКЛ ЗАТЕМ ВКЛ'
-      flightassistant:altitude: ОТКАЗ ИНД ВЫС
-      flightassistant:attitude: ОТКАЗ ИНД ОРИЕНТ
-      flightassistant:automation_modes: ОТКАЗ ИНД АВТО РЕЖИМ
-      flightassistant:coordinates: ОТКАЗ ИНД КООРД
-      flightassistant:course_deviation: ОТКАД ИНД ОТКЛ КУРС
-      flightassistant:elytra_durability: ОТКАЗ ИНД ПРЧН/ЭЛ
-      flightassistant:flight_directors: ОТКАЗ ИНД УКАЗ/П
-      flightassistant:flight_path: ОТКАЗ ИНД ВЕКТ/П
-      flightassistant:heading: ОТКАЗ ИНД КУРСА
-      flightassistant:radar_altitude: ОТКАЗ ИНД Р/ВЫС
-      flightassistant:speed: ОТКАЗ ИНД СКОР
-      flightassistant:status: ОТКАЗ ИНД СТАТУС
-      flightassistant:velocity_components: ОТКАЗ ИНД Г/С И В/C
+      flightassistant_hud:altitude: ОТКАЗ ИНД ВЫС
+      flightassistant_hud:attitude: ОТКАЗ ИНД ОРИЕНТ
+      flightassistant_hud:automation_modes: ОТКАЗ ИНД АВТО РЕЖИМ
+      flightassistant_hud:coordinates: ОТКАЗ ИНД КООРД
+      flightassistant_hud:course_deviation: ОТКАД ИНД ОТКЛ КУРС
+      flightassistant_hud:elytra_durability: ОТКАЗ ИНД ПРЧН/ЭЛ
+      flightassistant_hud:flight_directors: ОТКАЗ ИНД УКАЗ/П
+      flightassistant_hud:flight_path: ОТКАЗ ИНД ВЕКТ/П
+      flightassistant_hud:heading: ОТКАЗ ИНД КУРСА
+      flightassistant_hud:radar_altitude: ОТКАЗ ИНД Р/ВЫС
+      flightassistant_hud:speed: ОТКАЗ ИНД СКОР
+      flightassistant_hud:status: ОТКАЗ ИНД СТАТУС
+      flightassistant_hud:velocity_components: ОТКАЗ ИНД Г/С И В/C
   firework:
     .: ФРВК
     fault: ОТКАЗ СИСТ
@@ -244,37 +244,37 @@ menu.flightassistant:
     'on': 'ВКЛ'
     name:
       hud:
-        flightassistant:alert: Индикатор предупреждений
-        flightassistant:altitude: Индикатор высоты
-        flightassistant:attitude: Авиагоризонт
-        flightassistant:automation_modes: Индикатор режимов автоматизации
-        flightassistant:coordinates: Индикатор координат
-        flightassistant:course_deviation: Индикатор отклонения от курса
-        flightassistant:elytra_durability: Индикатор прочности элитр
-        flightassistant:flight_directors: Индикатор указателей полёта
-        flightassistant:flight_path: Индикатор пути полёта
-        flightassistant:heading: Индикатор курса
-        flightassistant:radar_altitude: Радиовысотомер
-        flightassistant:speed: Индикатор скорости
-        flightassistant:status: Индикатор статуса
-        flightassistant:velocity_components: Индикатор Г/С и В/С
+        flightassistant_hud:alert: Индикатор предупреждений
+        flightassistant_hud:altitude: Индикатор высоты
+        flightassistant_hud:attitude: Авиагоризонт
+        flightassistant_hud:automation_modes: Индикатор режимов автоматизации
+        flightassistant_hud:coordinates: Индикатор координат
+        flightassistant_hud:course_deviation: Индикатор отклонения от курса
+        flightassistant_hud:elytra_durability: Индикатор прочности элитр
+        flightassistant_hud:flight_directors: Индикатор указателей полёта
+        flightassistant_hud:flight_path: Индикатор пути полёта
+        flightassistant_hud:heading: Индикатор курса
+        flightassistant_hud:radar_altitude: Радиовысотомер
+        flightassistant_hud:speed: Индикатор скорости
+        flightassistant_hud:status: Индикатор статуса
+        flightassistant_hud:velocity_components: Индикатор Г/С и В/С
       computer:
-        flightassistant:air_data: Компьютер данных полёта
-        flightassistant:hud_display_data: Компьютер данных индикаторов HUD
-        flightassistant:alert: Компьютер предупреждений
-        flightassistant:chunk_status: Компьютер статуса чанков
-        flightassistant:elytra_status: Компьютер статуса элитр
-        flightassistant:flight_protections: Компьютер защит полёта
-        flightassistant:ground_proximity: Компьютер близости земли
-        flightassistant:stall: Компьютер обнаружения сваливания
-        flightassistant:void_proximity: Компьютер близости пустоты
-        flightassistant:auto_flight: Компьютер автополёта
-        flightassistant:firework: Компьютер фейерверков
-        flightassistant:flight_plan: Компьютер плана полёта
-        flightassistant:heading: Компьютер управления курсом
-        flightassistant:pitch: Компьютер управления углом наклона
-        flightassistant:roll: Компьютер управления креном
-        flightassistant:thrust: Компьютер тяги
+        flightassistant_hud:air_data: Компьютер данных полёта
+        flightassistant_hud:hud_display_data: Компьютер данных индикаторов HUD
+        flightassistant_hud:alert: Компьютер предупреждений
+        flightassistant_hud:chunk_status: Компьютер статуса чанков
+        flightassistant_hud:elytra_status: Компьютер статуса элитр
+        flightassistant_hud:flight_protections: Компьютер защит полёта
+        flightassistant_hud:ground_proximity: Компьютер близости земли
+        flightassistant_hud:stall: Компьютер обнаружения сваливания
+        flightassistant_hud:void_proximity: Компьютер близости пустоты
+        flightassistant_hud:auto_flight: Компьютер автополёта
+        flightassistant_hud:firework: Компьютер фейерверков
+        flightassistant_hud:flight_plan: Компьютер плана полёта
+        flightassistant_hud:heading: Компьютер управления курсом
+        flightassistant_hud:pitch: Компьютер управления углом наклона
+        flightassistant_hud:roll: Компьютер управления креном
+        flightassistant_hud:thrust: Компьютер тяги
   autoflight:
     .: Выбрать режимы автополёта
     disabled: ВЫКЛ

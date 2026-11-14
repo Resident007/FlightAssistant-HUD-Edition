@@ -1,53 +1,42 @@
-# FlightAssistant Continued
+# FlightAssistant HUD Edition
 
 > [!IMPORTANT]
-> **Unofficial community continuation**  
-> This is an unofficial fork of [FlightAssistant by Octol1ttle](https://github.com/Octol1ttle/FlightAssistant), kept up to date for Minecraft 26.2 and newer.  
-> It is **independent** and neither affiliated with nor endorsed by Octol1ttle. Please report problems with this fork [here](https://github.com/Henner4746/FlightAssistant/issues), not to the original project.
+> **Unofficial fork — read-only edition**  
+> This is an unofficial fork of [FlightAssistant by Octol1ttle](https://github.com/Octol1ttle/FlightAssistant), based on [FlightAssistant Continued](https://github.com/Henner4746/FlightAssistant).  
+> It is **not affiliated with and not endorsed by** the original authors. Please report problems with this fork [here](https://github.com/Resident007/FlightAssistant-HUD-Edition/issues), not to the original projects.  
+> Every feature that creates or modifies player control inputs has been removed, so the mod can be used on servers that do not allow flight automation.
 
-<p align=center>
-    <a href="https://modrinth.com/mod/flightassistant-continued">
-        <img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.2.0/assets/cozy/available/modrinth_vector.svg"
-            alt="Available on Modrinth"></a>
-    <a href="https://modrinth.com/mod/fabric-api/">
-        <img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.2.0/assets/cozy/requires/fabric-api_vector.svg"
-            alt="Requires Fabric API"></a>
-</p>
+**FlightAssistant HUD Edition** is a client-side avionics HUD for Minecraft elytra flight. It shows flight data and raises warnings and cautions, and it never touches your controls.
 
----
+## What this fork removes
 
-**FlightAssistant Continued** is a client-side mod that adds fully configurable avionics, situational awareness tools and advanced automation to Minecraft elytras, while still being friendly to casual users.
+All control-taking functionality is gone, including its settings screens and key binds:
+
+- Autopilot, auto-thrust, flight directors and FMS/flight plans
+- Automatic flight protections (terrain and void damage avoidance, automatic elytra deploy)
+- Firework locking and automatic firework use
+- Thrust and roll control sources, including Do a Barrel Roll compatibility
+
+There is no code path left that moves the player, changes pitch/yaw, or consumes items on your behalf. Everything the mod does is read-only: it observes the world and draws to your screen.
+
+## What remains
+
+- Fully customizable flight HUD: attitude, heading, speed, altitude, radar altitude, vertical speed, flight path vector, coordinates and elytra durability
+- Flight safety alerts: stall, ground proximity (Pull Up, Sink Rate, Terrain Ahead), void and chunk-loading warnings, HUD/computer faults, and explosive-firework caution
+- Config and setup screens for displays, computers and alert behaviour
+- Key binds to hide the current alert and restore the last hidden one
 
 ## Supported versions
 
 | Minecraft | Loader |
 |-----------|--------|
 | 26.3      | Fabric |
-| 26.2      | Fabric |
 
-Older Minecraft versions, Forge and NeoForge are covered by the [original FlightAssistant](https://modrinth.com/mod/flightassistant).
-
-## Main features
-
-- Fully customizable flight HUD ([wiki](https://github.com/Octol1ttle/FlightAssistant/wiki/HUD))
-  - An informative display showing flight data in real time
-    <img src="https://github.com/Octol1ttle/FlightAssistant/wiki/img/hud/full_screenshot_alt.png" alt="HUD screenshot 1">
-- Smart flight safety alerts ([wiki](https://github.com/Octol1ttle/FlightAssistant/wiki/Alerts))
-  - Be aware of unsafe flight conditions before it's too late
-    <img src="https://github.com/Octol1ttle/FlightAssistant/wiki/img/hud/alert_display_alt.png" alt="Alert screenshot">
-- Non-intrusive automatic flight protections ([wiki](https://github.com/Octol1ttle/FlightAssistant/wiki/Flight-protections))
-  - When you're not paying attention, FlightAssistant will protect you
-  - Examples: ground collision damage avoidance, void damage avoidance, automatic elytra deploying
-- Advanced autopilot with flight planning: fly completely hands-free ([wiki](https://github.com/Octol1ttle/FlightAssistant/wiki/Autopilot%3A-overview-and-basics))
-  - Flight plans can be saved to disk and loaded later
-  - With flight plans, a flight can be performed completely automatically from takeoff to landing
-    <img src="https://github.com/Octol1ttle/FlightAssistant/wiki/img/hud/full_screenshot.png" alt="HUD screenshot 2">
-
-The wiki and screenshots belong to the original project; the features work the same way in this fork.
+Minecraft 26.2 support has been dropped. For older Minecraft versions, Forge and NeoForge, or the full feature set, use the [original FlightAssistant](https://modrinth.com/mod/flightassistant) or [FlightAssistant Continued](https://modrinth.com/mod/flightassistant-continued).
 
 ## Installation
 
-Install [Fabric Loader](https://fabricmc.net/use/) and put these mods into your `mods` folder:
+Install [Fabric Loader](https://fabricmc.net/use/) for Minecraft 26.3 and put these mods into your `mods` folder:
 
 - [Fabric API](https://modrinth.com/mod/fabric-api)
 - [Fabric Language Kotlin](https://modrinth.com/mod/fabric-language-kotlin)
@@ -55,32 +44,42 @@ Install [Fabric Loader](https://fabricmc.net/use/) and put these mods into your 
 - [Architectury API](https://modrinth.com/mod/architectury-api)
 - [Mod Menu](https://modrinth.com/mod/modmenu) (optional, for the config button)
 
-[Do a Barrel Roll](https://modrinth.com/mod/do-a-barrel-roll) is supported but not required.
+The fork uses the mod ID `flightassistant_hud`, so it can be installed next to the original mod. Make sure the original is not also active if you are on a server that disallows automation.
 
 ## Default controls
 
 | Action | Key |
 |--------|-----|
-| Open the FlightAssistant setup screen | Numpad Enter |
-| Disconnect autopilot | Caps Lock |
-| Global automation override (hold) | Left Alt |
+| Open the setup screen | Numpad Enter |
 | Hide current alert / show last hidden alert | Numpad 0 / Numpad . |
-| Idle / decrease / increase / TOGA thrust | ← / ↓ / ↑ / → |
+| Toggle the mod on or off | Unbound by default |
 
-All keys can be changed in Options → Controls → Key Binds.
+All keys can be changed in Options → Controls → Key Binds, under the FlightAssistant category.
+
+## Configuration
+
+Settings are stored in `config/flightassistant_hud/`:
+
+- `global.json5` — toggles and general behaviour
+- `displays.json5` — HUD layout and display options
+- `safety.json5` — alert thresholds and alert methods
 
 ## Building
 
-You need JDK 25. The project uses [Stonecutter](https://stonecutter.kikugie.dev/) for multiple Minecraft versions:
+You need JDK 27 (the project compiles for Java 25). The project uses [Stonecutter](https://stonecutter.kikugie.dev/) for multiple Minecraft versions:
 
 ```
 ./gradlew :26.3-fabric:build
 ```
 
-The jar ends up in `versions/26.3-fabric/build/libs/`. Replace `26.3` with `26.2` for the other version.
+The jar ends up in `versions/26.3-fabric/build/libs/`.
+
+## Modrinth
+
+This fork is published on Modrinth as a separate, unofficial project. It is not a replacement for the original mod, and its project page is independent of the original authors' pages.
 
 ## Credits and license
 
-FlightAssistant was created by [Octol1ttle](https://github.com/Octol1ttle) with contributions from mctaylors and others. This fork is maintained by [Henner4746](https://github.com/Henner4746).
+FlightAssistant was created by [Octol1ttle](https://github.com/Octol1ttle) with contributions from mctaylors and others. The 26.x port and the continued maintenance come from [Henner4746](https://github.com/Henner4746). This read-only fork is maintained by [Resident007](https://github.com/Resident007).
 
 Licensed under the [GNU Lesser General Public License v3.0](LICENSE), like the original.

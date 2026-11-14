@@ -3,19 +3,20 @@
     "id": "${mod_id}",
     "version": "${mod_version}",
     "name": "${mod_name}",
-    "description": "HUD displays and informational alerts only. All automations, flight protections and flight-plan features have been removed.",
+    "description": "Unofficial fork of FlightAssistant with HUD displays and informational alerts only. Autopilot, auto-thrust, flight protections, auto-elytra, firework automation and flight plans have been removed, for servers that disallow flight automation.",
     "authors": [
+        "Resident007 (HUD Edition Maintainer)",
         "Henner4746 (Port Maintainer)",
         "Octol1ttle (Original Author)",
         "mctaylors"
     ],
     "contact": {
-        "homepage": "https://modrinth.com/mod/flightassistant-continued",
-        "sources": "https://github.com/Henner4746/FlightAssistant",
-        "issues": "https://github.com/Henner4746/FlightAssistant/issues"
+        "homepage": "https://github.com/Resident007/FlightAssistant-HUD-Edition",
+        "sources": "https://github.com/Resident007/FlightAssistant-HUD-Edition",
+        "issues": "https://github.com/Resident007/FlightAssistant-HUD-Edition/issues"
     },
     "license": "LGPL-3.0-only",
-    "icon": "assets/flightassistant/icon.png",
+    "icon": "assets/flightassistant_hud/icon.png",
     "environment": "client",
     "entrypoints": {
         "client": [

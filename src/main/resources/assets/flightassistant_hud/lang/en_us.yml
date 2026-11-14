@@ -14,15 +14,15 @@ alert.flightassistant: # TODO: get rid of alert categories, more flexible alert 
       .: HUD
       reset: ' -DISPLAY: OFF THEN ON'
       data: DATA SYS FAULT
-      flightassistant:altitude: ALT DSPL FAULT
-      flightassistant:attitude: ATT DSPL FAULT
-      flightassistant:coordinates: COORD DSPL FAULT
-      flightassistant:elytra_durability: EL/DURA DSPL FAULT
-      flightassistant:flight_path: F/PATH DSPL FAULT
-      flightassistant:heading: HDG DSPL FAULT
-      flightassistant:radar_altitude: R/ALT DSPL FAULT
-      flightassistant:speed: SPD DSPL FAULT
-      flightassistant:velocity_components: G/S & V/S DSPL FAULT
+      flightassistant_hud:altitude: ALT DSPL FAULT
+      flightassistant_hud:attitude: ATT DSPL FAULT
+      flightassistant_hud:coordinates: COORD DSPL FAULT
+      flightassistant_hud:elytra_durability: EL/DURA DSPL FAULT
+      flightassistant_hud:flight_path: F/PATH DSPL FAULT
+      flightassistant_hud:heading: HDG DSPL FAULT
+      flightassistant_hud:radar_altitude: R/ALT DSPL FAULT
+      flightassistant_hud:speed: SPD DSPL FAULT
+      flightassistant_hud:velocity_components: G/S & V/S DSPL FAULT
   firework:
     .: FRWK
     explosive:
@@ -161,25 +161,25 @@ menu.flightassistant:
     'on': 'ON'
     name:
       hud:
-        flightassistant:alert: Alert display
-        flightassistant:altitude: Altitude display
-        flightassistant:attitude: Attitude display
-        flightassistant:coordinates: Coordinates display
-        flightassistant:elytra_durability: Elytra durability display
-        flightassistant:flight_path: Flight path display
-        flightassistant:heading: Heading display
-        flightassistant:radar_altitude: Radar altitude display
-        flightassistant:speed: Speed display
-        flightassistant:velocity_components: G/S & V/S display
+        flightassistant_hud:alert: Alert display
+        flightassistant_hud:altitude: Altitude display
+        flightassistant_hud:attitude: Attitude display
+        flightassistant_hud:coordinates: Coordinates display
+        flightassistant_hud:elytra_durability: Elytra durability display
+        flightassistant_hud:flight_path: Flight path display
+        flightassistant_hud:heading: Heading display
+        flightassistant_hud:radar_altitude: Radar altitude display
+        flightassistant_hud:speed: Speed display
+        flightassistant_hud:velocity_components: G/S & V/S display
       computer:
-        flightassistant:air_data: Air data computer
-        flightassistant:hud_display_data: HUD display data computer
-        flightassistant:alert: Alert computer
-        flightassistant:chunk_status: Chunk status computer
-        flightassistant:elytra_status: Elytra status computer
-        flightassistant:ground_proximity: Ground proximity computer
-        flightassistant:stall: Stall computer
-        flightassistant:void_proximity: Void proximity computer
+        flightassistant_hud:air_data: Air data computer
+        flightassistant_hud:hud_display_data: HUD display data computer
+        flightassistant_hud:alert: Alert computer
+        flightassistant_hud:chunk_status: Chunk status computer
+        flightassistant_hud:elytra_status: Elytra status computer
+        flightassistant_hud:ground_proximity: Ground proximity computer
+        flightassistant_hud:stall: Stall computer
+        flightassistant_hud:void_proximity: Void proximity computer
 
 # TODO: stop using this
 short.flightassistant:

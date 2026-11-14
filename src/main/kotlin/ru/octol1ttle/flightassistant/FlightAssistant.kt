@@ -25,7 +25,7 @@ private val net.minecraft.client.Camera.yRot: Float
 //?}
 
 object FlightAssistant {
-    const val MOD_ID: String = "flightassistant"
+    const val MOD_ID: String = "flightassistant_hud"
     internal val mc: Minecraft = Minecraft.getInstance()
     internal val profiler: ProfilerFiller
 //? if >=1.21.4 {

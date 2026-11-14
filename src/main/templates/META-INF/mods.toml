@@ -2,36 +2,36 @@ modLoader = "kotlinforforge"
 loaderVersion = "[1,)"
 license = "LGPLv3"
 
-issueTrackerURL = "https://github.com/Octol1ttle/FlightAssistant/issues"
+issueTrackerURL = "https://github.com/Resident007/FlightAssistant-HUD-Edition/issues"
 
 [[mods]]
 modId = "${mod_id}"
 version = "${mod_version}"
 displayName = "${mod_name}"
-displayURL = "https://modrinth.com/mod/flightassistant"
-authors = ["Octol1ttle", "mctaylors" ]
+displayURL = "https://github.com/Resident007/FlightAssistant-HUD-Edition"
+authors = ["Resident007", "Henner4746", "Octol1ttle", "mctaylors" ]
 description = '''
-FlightAssistant brings your Elytra flying experience to the next level, all client-side!
+Unofficial fork of FlightAssistant with HUD displays and informational alerts only, for servers that disallow flight automation.
 '''
-logoFile = "assets/flightassistant/icon.png"
+logoFile = "assets/flightassistant_hud/icon.png"
 
-[[dependencies.flightassistant]]
+[[dependencies.flightassistant_hud]]
 modId = "minecraft"
 ${mnd}
 versionRange = "${mc}"
 ordering = "NONE"
 side = "CLIENT"
 
-[[dependencies.flightassistant]]
+[[dependencies.flightassistant_hud]]
 modId = "architectury"
 ${mnd}
-versionRange = "[9,]"
+versionRange = "[9,)"
 ordering = "NONE"
 side = "CLIENT"
 
-[[dependencies.flightassistant]]
+[[dependencies.flightassistant_hud]]
 modId = "yet_another_config_lib_v3"
 ${mnd}
-versionRange = "[3,]"
+versionRange = "[3,)"
 ordering = "NONE"
 side = "CLIENT"

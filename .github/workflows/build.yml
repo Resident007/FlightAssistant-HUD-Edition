@@ -1,4 +1,4 @@
-name: Build FlightAssistant
+name: Build FlightAssistant HUD Edition
 on: [ pull_request, push ]
 
 jobs:
@@ -7,7 +7,7 @@ jobs:
       matrix:
         # Use these Java versions
         java: [
-          21,    # Current Java LTS
+          27,
         ]
     runs-on: ubuntu-latest
     steps:
@@ -52,8 +52,8 @@ jobs:
         id: ref
 
       - name: Publish build artifacts
-        if: ${{ matrix.java == '21' }} # Only upload artifacts built from latest Java
+        if: ${{ matrix.java == '27' }} # Only upload artifacts built from latest Java
         uses: actions/upload-artifact@v4
         with:
-          name: flightassistant-${{ steps.ref.outputs.branch }}
+          name: flightassistant_hud-${{ steps.ref.outputs.branch }}
           path: build/libs/${{ steps.ref.outputs.version }}

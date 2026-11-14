@@ -177,7 +177,7 @@ yamlang {
 publishMods {
     val modrinthToken = findProperty("modrinthToken")
     val curseforgeToken = findProperty("curseforgeToken")
-    dryRun = modrinthToken == null || curseforgeToken == null
+    dryRun = modrinthToken == null && curseforgeToken == null
 
     modstitch.onEnable {
         file = modstitch.finalJarTask.flatMap { it.archiveFile }
@@ -194,32 +194,38 @@ publishMods {
     }
 
     val targets = property("mod.mc_targets").toString().split(' ')
-    modrinth {
-        projectId = property("publish.modrinth").toString()
-        accessToken = modrinthToken.toString()
-        targets.forEach(minecraftVersions::add)
-        if (loader == "fabric") {
-            requires("fabric-language-kotlin")
-            optional("modmenu")
-        } else {
-            requires("kotlin-for-forge")
+
+    // Leave publish.modrinth / publish.curseforge unset until the project exists.
+    findProperty("publish.modrinth")?.toString()?.let { project ->
+        modrinth {
+            projectId = project
+            accessToken = modrinthToken.toString()
+            targets.forEach(minecraftVersions::add)
+            if (loader == "fabric") {
+                requires("fabric-language-kotlin")
+                optional("modmenu")
+            } else {
+                requires("kotlin-for-forge")
+            }
+            requires("architectury-api")
+            requires("yacl")
         }
-        requires("architectury-api")
-        requires("yacl")
     }
 
-    curseforge {
-        projectId = property("publish.curseforge").toString()
-        accessToken = curseforgeToken.toString()
-        targets.forEach(minecraftVersions::add)
-        if (loader == "fabric") {
-            requires("fabric-language-kotlin")
-            optional("modmenu")
-        } else {
-            requires("kotlin-for-forge")
+    findProperty("publish.curseforge")?.toString()?.let { project ->
+        curseforge {
+            projectId = project
+            accessToken = curseforgeToken.toString()
+            targets.forEach(minecraftVersions::add)
+            if (loader == "fabric") {
+                requires("fabric-language-kotlin")
+                optional("modmenu")
+            } else {
+                requires("kotlin-for-forge")
+            }
+            requires("architectury-api")
+            requires("yacl")
         }
-        requires("architectury-api")
-        requires("yacl")
     }
 }
 

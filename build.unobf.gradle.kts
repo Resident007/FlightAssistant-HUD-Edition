@@ -123,15 +123,19 @@ publishMods {
     modLoaders.add(loader)
 
     val targets = prop("mod.mc_targets").split(' ')
-    modrinth {
-        projectId = prop("publish.modrinth")
-        accessToken = modrinthToken.toString()
-        targets.forEach(minecraftVersions::add)
-        requires("fabric-api")
-        requires("fabric-language-kotlin")
-        optional("modmenu")
-        requires("architectury-api")
-        requires("yacl")
+
+    // Leave publish.modrinth unset until the project exists.
+    findProperty("publish.modrinth")?.toString()?.let { project ->
+        modrinth {
+            projectId = project
+            accessToken = modrinthToken.toString()
+            targets.forEach(minecraftVersions::add)
+            requires("fabric-api")
+            requires("fabric-language-kotlin")
+            optional("modmenu")
+            requires("architectury-api")
+            requires("yacl")
+        }
     }
 }
 

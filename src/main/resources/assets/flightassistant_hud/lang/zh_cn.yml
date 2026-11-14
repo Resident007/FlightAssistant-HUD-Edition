@@ -24,19 +24,19 @@ alert.flightassistant:
       .: HUD
       reset: ' -显示：重启'
       data: 数据系统故障
-      'flightassistant:altitude': 高度显示故障
-      'flightassistant:attitude': 姿态显示故障
-      'flightassistant:automation_modes': 自动模式显示故障
-      'flightassistant:coordinates': 坐标显示故障
-      'flightassistant:course_deviation': 航向偏离显示故障
-      'flightassistant:elytra_durability': 鞘翅耐久度显示故障
-      'flightassistant:flight_directors': 飞行指示器显示故障
-      'flightassistant:flight_path': 飞行路径显示故障
-      'flightassistant:heading': 航向显示故障
-      'flightassistant:radar_altitude': 雷达高度显示故障
-      'flightassistant:speed': 速度显示故障
-      'flightassistant:status': 状态显示故障
-      'flightassistant:velocity_components': 地速与垂直速度显示故障
+      'flightassistant_hud:altitude': 高度显示故障
+      'flightassistant_hud:attitude': 姿态显示故障
+      'flightassistant_hud:automation_modes': 自动模式显示故障
+      'flightassistant_hud:coordinates': 坐标显示故障
+      'flightassistant_hud:course_deviation': 航向偏离显示故障
+      'flightassistant_hud:elytra_durability': 鞘翅耐久度显示故障
+      'flightassistant_hud:flight_directors': 飞行指示器显示故障
+      'flightassistant_hud:flight_path': 飞行路径显示故障
+      'flightassistant_hud:heading': 航向显示故障
+      'flightassistant_hud:radar_altitude': 雷达高度显示故障
+      'flightassistant_hud:speed': 速度显示故障
+      'flightassistant_hud:status': 状态显示故障
+      'flightassistant_hud:velocity_components': 地速与垂直速度显示故障
   firework:
     .: 烟花
     fault: 系统故障
@@ -237,37 +237,37 @@ menu.flightassistant:
     'on': 开启
     name:
       hud:
-        'flightassistant:alert': 显示警报
-        'flightassistant:altitude': 显示高度
-        'flightassistant:attitude': 显示姿态
-        'flightassistant:automation_modes': 显示自动化模式
-        'flightassistant:coordinates': 显示坐标
-        'flightassistant:course_deviation': 显示航向偏离
-        'flightassistant:elytra_durability': 显示鞘翅耐久度
-        'flightassistant:flight_directors': 显示飞行指引器
-        'flightassistant:flight_path': 显示飞行路径
-        'flightassistant:heading': 显示航向
-        'flightassistant:radar_altitude': 显示雷达高度
-        'flightassistant:speed': 显示速度
-        'flightassistant:status': 显示状态
-        'flightassistant:velocity_components': 显示地速和垂直速度
+        'flightassistant_hud:alert': 显示警报
+        'flightassistant_hud:altitude': 显示高度
+        'flightassistant_hud:attitude': 显示姿态
+        'flightassistant_hud:automation_modes': 显示自动化模式
+        'flightassistant_hud:coordinates': 显示坐标
+        'flightassistant_hud:course_deviation': 显示航向偏离
+        'flightassistant_hud:elytra_durability': 显示鞘翅耐久度
+        'flightassistant_hud:flight_directors': 显示飞行指引器
+        'flightassistant_hud:flight_path': 显示飞行路径
+        'flightassistant_hud:heading': 显示航向
+        'flightassistant_hud:radar_altitude': 显示雷达高度
+        'flightassistant_hud:speed': 显示速度
+        'flightassistant_hud:status': 显示状态
+        'flightassistant_hud:velocity_components': 显示地速和垂直速度
       computer:
-        'flightassistant:air_data': 大气数据计算器
-        'flightassistant:hud_display_data': HUD显示数据计算器
-        'flightassistant:alert': 警报计算器
-        'flightassistant:chunk_status': 区块状态计算器
-        'flightassistant:elytra_status': 鞘翅状态计算器
-        'flightassistant:flight_protections': 飞行保护计算器
-        'flightassistant:ground_proximity': 近地警报计算器
-        'flightassistant:stall': 失速计算器
-        'flightassistant:void_proximity': 虚空邻近计算器
-        'flightassistant:auto_flight': 自动飞行计算器
-        'flightassistant:firework': 烟花计算器
-        'flightassistant:flight_plan': 飞行计划计算器
-        'flightassistant:heading': 航向计算器
-        'flightassistant:pitch': 俯仰计算器
-        'flightassistant:roll': 翻滚计算器
-        'flightassistant:thrust': 推力计算器
+        'flightassistant_hud:air_data': 大气数据计算器
+        'flightassistant_hud:hud_display_data': HUD显示数据计算器
+        'flightassistant_hud:alert': 警报计算器
+        'flightassistant_hud:chunk_status': 区块状态计算器
+        'flightassistant_hud:elytra_status': 鞘翅状态计算器
+        'flightassistant_hud:flight_protections': 飞行保护计算器
+        'flightassistant_hud:ground_proximity': 近地警报计算器
+        'flightassistant_hud:stall': 失速计算器
+        'flightassistant_hud:void_proximity': 虚空邻近计算器
+        'flightassistant_hud:auto_flight': 自动飞行计算器
+        'flightassistant_hud:firework': 烟花计算器
+        'flightassistant_hud:flight_plan': 飞行计划计算器
+        'flightassistant_hud:heading': 航向计算器
+        'flightassistant_hud:pitch': 俯仰计算器
+        'flightassistant_hud:roll': 翻滚计算器
+        'flightassistant_hud:thrust': 推力计算器
         'do_a_barrel_roll:roll': 桶滚 翻滚计算器
         'do_a_barrel_roll:thrust': 桶滚 推力计算器
   autoflight:

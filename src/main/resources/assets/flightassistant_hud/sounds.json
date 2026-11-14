@@ -1,42 +1,42 @@
 {
     "approaching_stall": {
         "sounds": [
-            "flightassistant:approaching_stall"
+            "flightassistant_hud:approaching_stall"
         ]
     },
     "caution_terrain": {
         "sounds": [
-            "flightassistant:caution_terrain"
+            "flightassistant_hud:caution_terrain"
         ]
     },
     "full_stall": {
         "sounds": [
-            "flightassistant:full_stall"
+            "flightassistant_hud:full_stall"
         ]
     },
     "master_caution": {
         "sounds": [
-            "flightassistant:master_caution"
+            "flightassistant_hud:master_caution"
         ]
     },
     "master_warning": {
         "sounds": [
-            "flightassistant:master_warning"
+            "flightassistant_hud:master_warning"
         ]
     },
     "pull_up": {
         "sounds": [
-            "flightassistant:pull_up"
+            "flightassistant_hud:pull_up"
         ]
     },
     "sink_rate": {
         "sounds": [
-            "flightassistant:sink_rate"
+            "flightassistant_hud:sink_rate"
         ]
     },
     "terrain_ahead": {
         "sounds": [
-            "flightassistant:terrain_ahead"
+            "flightassistant_hud:terrain_ahead"
         ]
     }
 }

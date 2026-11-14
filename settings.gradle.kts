@@ -38,7 +38,6 @@ stonecutter {
         mc("1.21.6", "fabric")
         mc("1.21.9", "fabric")
         mc("1.21.11", "fabric")
-        mc("26.2", "fabric")
         mc("26.3", "fabric")
 
         // 26.x ships without obfuscation, so it builds with the non-remapping Loom instead of Modstitch
@@ -48,4 +47,4 @@ stonecutter {
     }
 }
 
-rootProject.name = "FlightAssistant"
+rootProject.name = "FlightAssistant-HUD-Edition"
