@@ -7,22 +7,15 @@ import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
 import ru.octol1ttle.flightassistant.FlightAssistant
-import ru.octol1ttle.flightassistant.api.autoflight.ControlInput
 import ru.octol1ttle.flightassistant.api.computer.ComputerBus
 import ru.octol1ttle.flightassistant.api.display.Display
 import ru.octol1ttle.flightassistant.api.display.HudFrame
-import ru.octol1ttle.flightassistant.api.util.FATickCounter
-import ru.octol1ttle.flightassistant.api.util.FloatLerper
 import ru.octol1ttle.flightassistant.api.util.ScreenSpace
 import ru.octol1ttle.flightassistant.api.util.extensions.*
 import ru.octol1ttle.flightassistant.config.FAConfig
 import ru.octol1ttle.flightassistant.config.options.DisplayOptions
-import ru.octol1ttle.flightassistant.impl.computer.autoflight.AutoFlightComputer
 
 class AttitudeDisplay(computers: ComputerBus) : Display(computers) {
-    private val minimumLerper: FloatLerper = FloatLerper()
-    private val maximumLerper: FloatLerper = FloatLerper()
-
     override fun allowedByConfig(): Boolean {
         return FAConfig.display.showAttitude != DisplayOptions.AttitudeDisplayMode.DISABLED
     }
@@ -51,7 +44,6 @@ class AttitudeDisplay(computers: ComputerBus) : Display(computers) {
             }
             if (FAConfig.display.showAttitude == DisplayOptions.AttitudeDisplayMode.HORIZON_AND_LADDER) {
                 renderPitchBars(centerX)
-                renderPitchLimits(centerX)
                 drawPitchReferenceMark(47.5f, centerX)
                 drawPitchReferenceMark(-2.2f, centerX)
                 drawPitchReferenceMark(-38.5f, centerX)
@@ -61,9 +53,6 @@ class AttitudeDisplay(computers: ComputerBus) : Display(computers) {
             }
 
             popPose()
-            if (FAConfig.display.showAutomationModes) {
-                renderPitchTarget(this.centerX - 6, centerY - 10)
-            }
         }
     }
 
@@ -97,39 +86,6 @@ class AttitudeDisplay(computers: ComputerBus) : Display(computers) {
         val nextDown: Int = Mth.quantize(computers.data.pitch.toDouble(), step)
         for (i: Int in nextDown downTo -90 step step) {
             drawPitchBar(i, centerX, ScreenSpace.getY(i.toFloat()) ?: break)
-        }
-    }
-
-    private fun FAGuiGraphics.renderPitchLimits(centerX: Float) {
-        val step: Int = FAConfig.display.attitudeDegreeStep / 2
-
-        val arrowText: Component = Component.literal("V")
-
-        val maxInput: ControlInput? = computers.pitch.maximumPitch
-        val minInput: ControlInput? = computers.pitch.minimumPitch
-        var max: Float = maximumLerper.get(maxInput?.target, FATickCounter.timePassed * 2.0f) ?: 90.0f
-        var min: Float = (minimumLerper.get(minInput?.target, FATickCounter.timePassed * 2.0f) ?: -90.0f).coerceAtMost(max)
-
-        while (max <= 180) {
-            val y: Int = ScreenSpace.getY(max) ?: break
-
-            drawMiddleAlignedString(arrowText, centerX.toInt(), y - 9, if (maxInput?.status == ControlInput.Status.ACTIVE) warningColor else cautionColor)
-
-            max += step
-        }
-        while (min >= -180) {
-            val y: Int = ScreenSpace.getY(min) ?: break
-            pushPose()
-
-            pose().translate(centerX, y.toFloat() /*? if <1.21.6 {*//*, 0.0f *//*?}*/) // Rotate around the middle of the arrow
-//? if >=1.21.6 {
-            pose().rotate(ru.octol1ttle.flightassistant.api.util.radians(180.0f))
-//?} else
-            /*pose().mulPose(Axis.ZN.rotationDegrees(180.0f))*/ // Flip upside down
-            drawMiddleAlignedString(arrowText, 0, -9, if (minInput?.status == ControlInput.Status.ACTIVE) warningColor else cautionColor)
-
-            popPose()
-            min -= step
         }
     }
 
@@ -173,21 +129,7 @@ class AttitudeDisplay(computers: ComputerBus) : Display(computers) {
     }
 
     private fun getPitchBarColor(pitch: Float): Int {
-        val min: ControlInput? = computers.pitch.minimumPitch
-        val max: ControlInput? = computers.pitch.maximumPitch
-        return if (max != null && pitch > max.target)
-            if (max.status == ControlInput.Status.ACTIVE) warningColor else cautionColor
-        else if (min != null && pitch < min.target)
-            if (min.status == ControlInput.Status.ACTIVE) warningColor else cautionColor
-        else
-            primaryColor
-    }
-
-    private fun FAGuiGraphics.renderPitchTarget(x: Int, y: Int) {
-        val active: AutoFlightComputer.VerticalMode? = computers.autoflight.activeVerticalMode
-        if ((computers.autoflight.flightDirectors || computers.autoflight.autopilot) && active is AutoFlightComputer.FollowsPitchMode) {
-            drawRightAlignedString("%.1f".formatRoot(active.targetPitch), x, y, primaryAdvisoryColor)
-        }
+        return primaryColor
     }
 
     override fun renderFaulted(guiGraphics: FAGuiGraphics) {

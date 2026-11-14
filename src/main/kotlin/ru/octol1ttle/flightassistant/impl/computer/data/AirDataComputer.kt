@@ -12,7 +12,6 @@ import net.minecraft.tags.DamageTypeTags
 import net.minecraft.util.Mth
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.phys.Vec3
-import ru.octol1ttle.flightassistant.FAKeyMappings
 import ru.octol1ttle.flightassistant.FlightAssistant
 import ru.octol1ttle.flightassistant.api.computer.Computer
 import ru.octol1ttle.flightassistant.api.computer.ComputerBus
@@ -82,17 +81,6 @@ class AirDataComputer(computers: ComputerBus, private val mc: Minecraft) : Compu
         forwardVelocity = computeForwardVector(velocity)
         forwardVelocityPerSecond = forwardVelocity.perSecond()
         forwardAcceleration = forwardVelocity.length() - computeForwardVector(player.getLerpedDeltaMovement(0.0f)).length()
-    }
-
-    fun automationsAllowed(checkFlying: Boolean = true): Boolean {
-        if (FAKeyMappings.globalAutomationOverride.isDown) {
-            return false
-        }
-        //? if <26.2 {
-        /*return (!checkFlying || flying) && (FAConfig.global.automationsAllowedInOverlays || (mc.screen == null && mc.overlay == null))
-*///?} else {
-        return (!checkFlying || flying) && (FAConfig.global.automationsAllowedInOverlays || (mc.gui.screen() == null && mc.gui.overlay() == null))
-//?}
     }
 
     fun isInvulnerableTo(source: DamageSource): Boolean {

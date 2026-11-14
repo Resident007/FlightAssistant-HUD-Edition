@@ -14,101 +14,43 @@ class SafetyOptions {
 
     @SerialEntry
     var elytraDurabilityAlertMode: AlertMode = AlertMode.WARNING_AND_CAUTION
-    @SerialEntry
-    var elytraAutoOpen: Boolean = true
-    @SerialEntry @Deprecated("Functionality not possible in vanilla")
-    var elytraCloseUnderwater: Boolean = true
 
     @SerialEntry
     var stallAlertMode: AlertMode = AlertMode.WARNING_AND_CAUTION
     @SerialEntry
     var stallAlertMethod: AlertMethod = AlertMethod.SCREEN_AND_AUDIO
-    @SerialEntry
-    var stallLimitPitch: Boolean = true
-    @SerialEntry
-    var stallAutoThrust: Boolean = true
 
     @SerialEntry
     var voidAlertMode: AlertMode = AlertMode.WARNING_AND_CAUTION
-    @SerialEntry
-    var voidLimitPitch: Boolean = true
-    @SerialEntry
-    var voidAutoThrust: Boolean = true // TODO: merge to AutoRecover since these settings rely on each other
-    @SerialEntry
-    var voidAutoPitch: Boolean = true
 
     // TODO: Early/Medium/Late setting for GPWS reaction
     @SerialEntry
     var sinkRateAlertMode: AlertMode = AlertMode.WARNING_AND_CAUTION
     @SerialEntry
     var sinkRateAlertMethod: AlertMethod = AlertMethod.SCREEN_AND_AUDIO
-    @SerialEntry
-    var sinkRateLimitPitch: Boolean = true
-    @SerialEntry
-    var sinkRateAutoThrust: Boolean = true
-    @SerialEntry
-    var sinkRateAutoPitch: Boolean = true
 
     @SerialEntry
     var obstacleAlertMode: AlertMode = AlertMode.WARNING_AND_CAUTION
     @SerialEntry
     var obstacleAlertMethod: AlertMethod = AlertMethod.SCREEN_AND_AUDIO
-    @SerialEntry
-    var obstacleLimitPitch: Boolean = false // TODO: remove, limiting pitch is often dangerous, especially in the Nether
-    @SerialEntry
-    var obstacleAutoThrust: Boolean = true
-    @SerialEntry
-    var obstacleAutoPitch: Boolean = true
-
-    @SerialEntry
-    var altitudeLossAlert: Boolean = true
-    @SerialEntry
-    var altitudeLossAlertMethod: AlertMethod = AlertMethod.SCREEN_AND_AUDIO
-
-    @SerialEntry
-    var belowGlideSlopeAlertMode: AlertMode = AlertMode.WARNING_AND_CAUTION
-    @SerialEntry
-    var belowGlideSlopeAlertMethod: AlertMethod = AlertMethod.SCREEN_AND_AUDIO
 
     @SerialEntry
     var fireworkExplosiveAlert: Boolean = true
-    @SerialEntry
-    var fireworkLockExplosive: Boolean = true
-    @SerialEntry
-    var fireworkLockObstacles: Boolean = true
 
     internal fun setDisabled(): SafetyOptions {
         this.alertVolume = 0.0f
 
         this.elytraDurabilityAlertMode = AlertMode.DISABLED
-        this.elytraAutoOpen = false
-        this.elytraCloseUnderwater = false
 
         this.stallAlertMode = AlertMode.DISABLED
-        this.stallLimitPitch = false
-        this.stallAutoThrust = false
-        
+
         this.voidAlertMode = AlertMode.DISABLED
-        this.voidLimitPitch = false
-        this.voidAutoThrust = false
-        this.voidAutoPitch = false
 
         this.sinkRateAlertMode = AlertMode.DISABLED
-        this.sinkRateLimitPitch = false
-        this.sinkRateAutoThrust = false
-        this.sinkRateAutoPitch = false
 
         this.obstacleAlertMode = AlertMode.DISABLED
-        this.obstacleLimitPitch = false
-        this.obstacleAutoThrust = false
-        this.obstacleAutoPitch = false
-
-        this.altitudeLossAlert = false
-        this.belowGlideSlopeAlertMode = AlertMode.DISABLED
 
         this.fireworkExplosiveAlert = false
-        this.fireworkLockExplosive = false
-        this.fireworkLockObstacles = false
         return this
     }
 

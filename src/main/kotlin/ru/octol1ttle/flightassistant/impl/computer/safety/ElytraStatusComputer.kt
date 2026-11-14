@@ -5,7 +5,6 @@ import kotlin.math.round
 import kotlin.math.roundToInt
 import ru.octol1ttle.flightassistant.api.util.extensions.*
 import net.minecraft.network.chat.Component
-import net.minecraft.network.protocol.game.ServerboundPlayerCommandPacket
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
 import net.minecraft.world.entity.player.Player
@@ -16,57 +15,15 @@ import ru.octol1ttle.flightassistant.FlightAssistant
 import ru.octol1ttle.flightassistant.api.computer.Computer
 import ru.octol1ttle.flightassistant.api.computer.ComputerBus
 import ru.octol1ttle.flightassistant.api.util.extensions.formatRoot
-import ru.octol1ttle.flightassistant.api.util.extensions.notClimbable
-import ru.octol1ttle.flightassistant.config.FAConfig
 import ru.octol1ttle.flightassistant.config.options.DisplayOptions
 import ru.octol1ttle.flightassistant.impl.computer.data.AirDataComputer
 
 class ElytraStatusComputer(computers: ComputerBus) : Computer(computers) {
     private var activeElytra: ItemStack? = null
-    private var syncedFlyingState: Boolean? = null
 
     override fun tick() {
         val data: AirDataComputer = computers.data
         activeElytra = findActiveElytra(data.player)
-
-        if (activeElytra == null || data.player.onGround()) {
-            syncedFlyingState = null
-            return
-        }
-        if (syncedFlyingState != null) {
-            if (syncedFlyingState != data.flying) {
-                syncedFlyingState = null
-            }
-            return
-        }
-        if (!data.automationsAllowed(false)) {
-            return
-        }
-
-        if (FAConfig.safety.elytraCloseUnderwater && data.flying && data.player.isUnderWater) {
-            sendSwitchState(data)
-        }
-
-        val flying: Boolean = data.flying || data.player.abilities.mayfly
-        val hasUsableElytra: Boolean =
-//? if >=1.21.4 {
-            net.minecraft.world.entity.EquipmentSlot.VALUES.any { data.player.getItemBySlot(it) == activeElytra && net.minecraft.world.entity.LivingEntity.canGlideUsing(data.player.getItemBySlot(it), it) }
-//?} else
-            /*data.player.armorSlots.contains(activeElytra) && net.minecraft.world.item.ElytraItem.isFlyEnabled(activeElytra!!)*/
-        val noneClimbable: Boolean = data.player.blockStateOn.notClimbable(data.player) &&
-//? if >=1.21.1 {
-                data.player.inBlockState.notClimbable(data.player)
-//?} else
-                /*data.player.feetBlockState.notClimbable(data.player)*/
-        val lookingToClutch: Boolean = data.pitch <= -70.0f
-        if (FAConfig.safety.elytraAutoOpen && !flying && !data.fallDistanceSafe && hasUsableElytra && noneClimbable && !lookingToClutch) {
-            sendSwitchState(data)
-        }
-    }
-
-    private fun sendSwitchState(data: AirDataComputer) {
-        syncedFlyingState = data.flying
-        data.player.connection.send(ServerboundPlayerCommandPacket(data.player, ServerboundPlayerCommandPacket.Action.START_FALL_FLYING))
     }
 
     private fun findActiveElytra(player: Player): ItemStack? {
@@ -153,7 +110,6 @@ class ElytraStatusComputer(computers: ComputerBus) : Computer(computers) {
 
     override fun reset() {
         activeElytra = null
-        syncedFlyingState = null
     }
 
     companion object {

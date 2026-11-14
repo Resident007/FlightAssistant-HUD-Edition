@@ -11,7 +11,4 @@ class GlobalOptions {
 
     @SerialEntry
     internal var safetyEnabled: Boolean = true
-
-    @SerialEntry
-    internal var automationsAllowedInOverlays: Boolean = false
 }

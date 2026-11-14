@@ -69,12 +69,6 @@ object FAConfigScreen {
                 binding(current::safetyEnabled, defaults.safetyEnabled)
                 controller(tickBox())
             }
-
-            rootOptions.register("automations_allowed_in_overlays") {
-                setGlobalName()
-                binding(current::automationsAllowedInOverlays, defaults.automationsAllowedInOverlays)
-                controller(tickBox())
-            }
         }
 
     private fun RootDsl.registerDisplayOptions(
@@ -241,26 +235,6 @@ object FAConfigScreen {
                 binding(current::showAlerts, defaults.showAlerts)
                 controller(tickBox())
             }
-            rootOptions.register("misc.status_messages") {
-                setDisplayName()
-                binding(current::showStatusMessages, defaults.showStatusMessages)
-                controller(tickBox())
-            }
-            rootOptions.register("misc.automation_modes") {
-                setDisplayName()
-                binding(current::showAutomationModes, defaults.showAutomationModes)
-                controller(tickBox())
-            }
-            rootOptions.register("misc.flight_directors") {
-                setDisplayName()
-                binding(current::showFlightDirectors, defaults.showFlightDirectors)
-                controller(tickBox())
-            }
-            rootOptions.register("misc.course_deviation") {
-                setDisplayName()
-                binding(current::showCourseDeviation, defaults.showCourseDeviation)
-                controller(tickBox())
-            }
         }
     }
 
@@ -295,16 +269,6 @@ object FAConfigScreen {
                 binding(current::elytraDurabilityAlertMode, defaults.elytraDurabilityAlertMode)
                 controller(enumSwitch(SafetyOptions.AlertMode::class.java))
             }
-            rootOptions.register("elytra.auto_open") {
-                setSafetyName()
-                binding(current::elytraAutoOpen, defaults.elytraAutoOpen)
-                controller(tickBox())
-            }
-            rootOptions.register("elytra.close_underwater") {
-                setSafetyName()
-                binding(current::elytraCloseUnderwater, defaults.elytraCloseUnderwater)
-                controller(tickBox())
-            }
 
             rootOptions.registerLabel(
                 "stall",
@@ -320,16 +284,6 @@ object FAConfigScreen {
                 binding(current::stallAlertMethod, defaults.stallAlertMethod)
                 controller(enumSwitch(SafetyOptions.AlertMethod::class.java))
             }
-            rootOptions.register("stall.limit_pitch") {
-                setSafetyName()
-                binding(current::stallLimitPitch, defaults.stallLimitPitch)
-                controller(tickBox())
-            }
-            rootOptions.register("stall.auto_thrust") {
-                setSafetyName()
-                binding(current::stallAutoThrust, defaults.stallAutoThrust)
-                controller(tickBox())
-            }
 
             rootOptions.registerLabel(
                 "void",
@@ -339,21 +293,6 @@ object FAConfigScreen {
                 setSafetyName()
                 binding(current::voidAlertMode, defaults.voidAlertMode)
                 controller(enumSwitch(SafetyOptions.AlertMode::class.java))
-            }
-            rootOptions.register("void.limit_pitch") {
-                setSafetyName()
-                binding(current::voidLimitPitch, defaults.voidLimitPitch)
-                controller(tickBox())
-            }
-            rootOptions.register("void.auto_thrust") {
-                setSafetyName()
-                binding(current::voidAutoThrust, defaults.voidAutoThrust)
-                controller(tickBox())
-            }
-            rootOptions.register("void.auto_pitch") {
-                setSafetyName()
-                binding(current::voidAutoPitch, defaults.voidAutoPitch)
-                controller(tickBox())
             }
 
             rootOptions.registerLabel(
@@ -370,21 +309,6 @@ object FAConfigScreen {
                 binding(current::sinkRateAlertMethod, defaults.sinkRateAlertMethod)
                 controller(enumSwitch(SafetyOptions.AlertMethod::class.java))
             }
-            rootOptions.register("gpws.sink_rate.limit_pitch") {
-                setSafetyName()
-                binding(current::sinkRateLimitPitch, defaults.sinkRateLimitPitch)
-                controller(tickBox())
-            }
-            rootOptions.register("gpws.sink_rate.auto_thrust") {
-                setSafetyName()
-                binding(current::sinkRateAutoThrust, defaults.sinkRateAutoThrust)
-                controller(tickBox())
-            }
-            rootOptions.register("gpws.sink_rate.auto_pitch") {
-                setSafetyName()
-                binding(current::sinkRateAutoPitch, defaults.sinkRateAutoPitch)
-                controller(tickBox())
-            }
             rootOptions.register("gpws.obstacle.alert_mode") {
                 setSafetyName()
                 binding(current::obstacleAlertMode, defaults.obstacleAlertMode)
@@ -395,41 +319,6 @@ object FAConfigScreen {
                 binding(current::obstacleAlertMethod, defaults.obstacleAlertMethod)
                 controller(enumSwitch(SafetyOptions.AlertMethod::class.java))
             }
-            rootOptions.register("gpws.obstacle.limit_pitch") {
-                setSafetyName()
-                binding(current::obstacleLimitPitch, defaults.obstacleLimitPitch)
-                controller(tickBox())
-            }
-            rootOptions.register("gpws.obstacle.auto_thrust") {
-                setSafetyName()
-                binding(current::obstacleAutoThrust, defaults.obstacleAutoThrust)
-                controller(tickBox())
-            }
-            rootOptions.register("gpws.obstacle.auto_pitch") {
-                setSafetyName()
-                binding(current::obstacleAutoPitch, defaults.obstacleAutoPitch)
-                controller(tickBox())
-            }
-            rootOptions.register("gpws.altitude_loss_with_toga.enabled") {
-                setSafetyName()
-                binding(current::altitudeLossAlert, defaults.altitudeLossAlert)
-                controller(tickBox())
-            }
-            rootOptions.register("gpws.altitude_loss_with_toga.alert_method") {
-                setSafetyName()
-                binding(current::altitudeLossAlertMethod, defaults.altitudeLossAlertMethod)
-                controller(enumSwitch(SafetyOptions.AlertMethod::class.java))
-            }
-            rootOptions.register("gpws.below_glide_slope.alert_mode") {
-                setSafetyName()
-                binding(current::belowGlideSlopeAlertMode, defaults.belowGlideSlopeAlertMode)
-                controller(enumSwitch(SafetyOptions.AlertMode::class.java))
-            }
-            rootOptions.register("gpws.below_glide_slope.alert_method") {
-                setSafetyName()
-                binding(current::belowGlideSlopeAlertMethod, defaults.belowGlideSlopeAlertMethod)
-                controller(enumSwitch(SafetyOptions.AlertMethod::class.java))
-            }
 
             rootOptions.registerLabel(
                 "firework",
@@ -438,16 +327,6 @@ object FAConfigScreen {
             rootOptions.register("firework.explosive_alert") {
                 setSafetyName()
                 binding(current::fireworkExplosiveAlert, defaults.fireworkExplosiveAlert)
-                controller(tickBox())
-            }
-            rootOptions.register("firework.lock_explosive") {
-                setSafetyName()
-                binding(current::fireworkLockExplosive, defaults.fireworkLockExplosive)
-                controller(tickBox())
-            }
-            rootOptions.register("firework.lock_obstacles") {
-                setSafetyName()
-                binding(current::fireworkLockObstacles, defaults.fireworkLockObstacles)
                 controller(tickBox())
             }
         }

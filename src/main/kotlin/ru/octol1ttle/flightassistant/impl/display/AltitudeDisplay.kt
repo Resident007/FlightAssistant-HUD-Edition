@@ -11,7 +11,6 @@ import ru.octol1ttle.flightassistant.api.display.Display
 import ru.octol1ttle.flightassistant.api.display.HudFrame
 import ru.octol1ttle.flightassistant.api.util.extensions.*
 import ru.octol1ttle.flightassistant.config.FAConfig
-import ru.octol1ttle.flightassistant.impl.computer.autoflight.AutoFlightComputer
 
 class AltitudeDisplay(computers: ComputerBus) : Display(computers) {
     override fun allowedByConfig(): Boolean {
@@ -25,9 +24,6 @@ class AltitudeDisplay(computers: ComputerBus) : Display(computers) {
             }
             if (FAConfig.display.showAltitudeScale) {
                 renderAltitudeScale(HudFrame.right, centerY)
-            }
-            if (FAConfig.display.showAutomationModes) {
-                renderAltitudeTarget(HudFrame.right + 2, HudFrame.top - 9)
             }
         }
     }
@@ -107,15 +103,6 @@ class AltitudeDisplay(computers: ComputerBus) : Display(computers) {
         }
 
         return true
-    }
-
-    private fun FAGuiGraphics.renderAltitudeTarget(x: Int, y: Int) {
-        val color: Int
-        val active: AutoFlightComputer.VerticalMode? = computers.autoflight.activeVerticalMode
-        if ((computers.autoflight.flightDirectors || computers.autoflight.autopilot) && active is AutoFlightComputer.FollowsAltitudeMode) {
-            color = if (active == computers.autoflight.selectedVerticalMode) primaryAdvisoryColor else secondaryAdvisoryColor
-            drawString(active.targetAltitude.toString(), x, y, color)
-        }
     }
 
     override fun renderFaulted(guiGraphics: FAGuiGraphics) {

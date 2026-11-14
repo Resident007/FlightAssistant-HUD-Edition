@@ -10,7 +10,6 @@ import ru.octol1ttle.flightassistant.api.display.Display
 import ru.octol1ttle.flightassistant.api.display.HudFrame
 import ru.octol1ttle.flightassistant.api.util.extensions.*
 import ru.octol1ttle.flightassistant.config.FAConfig
-import ru.octol1ttle.flightassistant.impl.computer.autoflight.AutoFlightComputer
 
 class SpeedDisplay(computers: ComputerBus) : Display(computers) {
     override fun allowedByConfig(): Boolean {
@@ -24,9 +23,6 @@ class SpeedDisplay(computers: ComputerBus) : Display(computers) {
             }
             if (FAConfig.display.showSpeedScale) {
                 renderSpeedScale(HudFrame.left, centerY)
-            }
-            if (FAConfig.display.showAutomationModes) {
-                renderSpeedTarget(HudFrame.left, HudFrame.top - 9)
             }
         }
     }
@@ -104,22 +100,6 @@ class SpeedDisplay(computers: ComputerBus) : Display(computers) {
         }
 
         return true
-    }
-
-    private fun FAGuiGraphics.renderSpeedTarget(x: Int, y: Int) {
-        val color: Int
-        val active: AutoFlightComputer.ThrustMode? = computers.autoflight.activeThrustMode
-        if (computers.autoflight.autoThrust && active is AutoFlightComputer.FollowsSpeedMode) {
-            color = if (active == computers.autoflight.selectedThrustMode) primaryAdvisoryColor else secondaryAdvisoryColor
-            drawRightAlignedString(active.targetSpeed.toString(), x, y, color)
-            return
-        }
-
-        val activeVertical: AutoFlightComputer.VerticalMode? = computers.autoflight.activeVerticalMode
-        if ((computers.autoflight.flightDirectors || computers.autoflight.autopilot) && activeVertical is AutoFlightComputer.FollowsSpeedMode) {
-            color = if (activeVertical == computers.autoflight.selectedVerticalMode) primaryAdvisoryColor else secondaryAdvisoryColor
-            drawRightAlignedString(activeVertical.targetSpeed.toString(), x, y, color)
-        }
     }
 
     override fun renderFaulted(guiGraphics: FAGuiGraphics) {

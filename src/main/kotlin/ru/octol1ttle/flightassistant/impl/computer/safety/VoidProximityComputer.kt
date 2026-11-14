@@ -1,17 +1,11 @@
 package ru.octol1ttle.flightassistant.impl.computer.safety
 
 import ru.octol1ttle.flightassistant.api.util.extensions.*
-import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import ru.octol1ttle.flightassistant.FlightAssistant
-import ru.octol1ttle.flightassistant.api.autoflight.ControlInput
 import ru.octol1ttle.flightassistant.api.computer.Computer
 import ru.octol1ttle.flightassistant.api.computer.ComputerBus
-import ru.octol1ttle.flightassistant.api.computer.ComputerQuery
 import ru.octol1ttle.flightassistant.api.util.extensions.bottomY
-import ru.octol1ttle.flightassistant.config.FAConfig
-import ru.octol1ttle.flightassistant.impl.computer.autoflight.base.PitchComputer
-import ru.octol1ttle.flightassistant.impl.computer.autoflight.base.ThrustComputer
 
 class VoidProximityComputer(computers: ComputerBus) : Computer(computers) {
     var status: Status = Status.ABOVE_GROUND
@@ -29,37 +23,6 @@ class VoidProximityComputer(computers: ComputerBus) : Computer(computers) {
             } else {
                 Status.REACHED_DAMAGE_ALTITUDE
             }
-        }
-    }
-
-    override fun <Response> handleQuery(query: ComputerQuery<Response>) {
-        if (query is ThrustComputer.TargetThrustQuery && status <= Status.APPROACHING_DAMAGE_ALTITUDE) {
-            query.respond(ControlInput(
-                1.0f,
-                Component.translatable("mode.flightassistant.thrust.toga"),
-                ControlInput.Priority.HIGH,
-                status = ControlInput.Status.fromBooleans(status == Status.REACHED_DAMAGE_ALTITUDE, enabled = FAConfig.safety.voidAutoThrust)
-            ))
-        }
-
-        if (query is PitchComputer.TargetPitchQuery && status <= Status.APPROACHING_DAMAGE_ALTITUDE) {
-            query.respond(ControlInput(
-                90.0f, Component.translatable("mode.flightassistant.vertical.void_escape"), ControlInput.Priority.HIGH,
-                status = ControlInput.Status.fromBooleans(
-                    status == Status.REACHED_DAMAGE_ALTITUDE && computers.thrust.current == 1.0f && !computers.thrust.noThrustSource,
-                    enabled = FAConfig.safety.voidAutoPitch
-                )
-            ))
-        }
-
-        if (query is PitchComputer.MinimumPitchQuery && status != Status.ABOVE_GROUND) {
-            query.respond(ControlInput(
-                (-90.0f + (computers.data.level.bottomY - (computers.data.altitude + computers.data.velocityPerSecond.y.coerceAtMost(0.0))) / 64.0f * 105.0f).toFloat()
-                    .coerceIn(-90.0f..15.0f),
-                Component.translatable("mode.flightassistant.vertical.void_protection"),
-                ControlInput.Priority.HIGH,
-                status = ControlInput.Status.fromBooleans(true, enabled = FAConfig.safety.voidLimitPitch)
-            ))
         }
     }
 

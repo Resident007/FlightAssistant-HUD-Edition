@@ -12,7 +12,6 @@ import ru.octol1ttle.flightassistant.api.display.HudFrame
 import ru.octol1ttle.flightassistant.api.util.extensions.*
 import ru.octol1ttle.flightassistant.api.util.findShortestPath
 import ru.octol1ttle.flightassistant.config.FAConfig
-import ru.octol1ttle.flightassistant.impl.computer.autoflight.AutoFlightComputer
 
 class HeadingDisplay(computers: ComputerBus) : Display(computers) {
     override fun allowedByConfig(): Boolean {
@@ -26,9 +25,6 @@ class HeadingDisplay(computers: ComputerBus) : Display(computers) {
             }
             if (FAConfig.display.showHeadingScale) {
                 renderHeadingScale(centerX, HudFrame.bottom + 1)
-            }
-            if (FAConfig.display.showAutomationModes) {
-                renderHeadingTarget(centerX, HudFrame.bottom - 8)
             }
         }
     }
@@ -106,13 +102,6 @@ class HeadingDisplay(computers: ComputerBus) : Display(computers) {
         }
 
         return true
-    }
-
-    private fun FAGuiGraphics.renderHeadingTarget(x: Int, y: Int) {
-        val active: AutoFlightComputer.LateralMode? = computers.autoflight.activeLateralMode
-        if ((computers.autoflight.flightDirectors || computers.autoflight.autopilot) && active is AutoFlightComputer.FollowsHeadingMode) {
-            drawMiddleAlignedString("%03d".formatRoot(active.targetHeading), x, y, primaryAdvisoryColor)
-        }
     }
 
     override fun renderFaulted(guiGraphics: FAGuiGraphics) {

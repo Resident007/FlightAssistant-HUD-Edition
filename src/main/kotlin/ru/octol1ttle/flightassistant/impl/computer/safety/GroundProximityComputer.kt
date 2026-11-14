@@ -4,7 +4,6 @@ import kotlin.math.abs
 import kotlin.math.max
 import ru.octol1ttle.flightassistant.api.util.extensions.*
 import net.minecraft.core.Direction
-import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.level.ClipContext
@@ -12,17 +11,11 @@ import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.HitResult
 import net.minecraft.world.phys.Vec3
 import ru.octol1ttle.flightassistant.FlightAssistant
-import ru.octol1ttle.flightassistant.api.autoflight.ControlInput
 import ru.octol1ttle.flightassistant.api.computer.Computer
 import ru.octol1ttle.flightassistant.api.computer.ComputerBus
-import ru.octol1ttle.flightassistant.api.computer.ComputerQuery
 import ru.octol1ttle.flightassistant.api.util.extensions.bottomY
 import ru.octol1ttle.flightassistant.api.util.extensions.topY
-import ru.octol1ttle.flightassistant.api.util.inverseMin
 import ru.octol1ttle.flightassistant.api.util.throwIfNotInRange
-import ru.octol1ttle.flightassistant.config.FAConfig
-import ru.octol1ttle.flightassistant.impl.computer.autoflight.base.PitchComputer
-import ru.octol1ttle.flightassistant.impl.computer.autoflight.base.ThrustComputer
 
 class GroundProximityComputer(computers: ComputerBus) : Computer(computers) {
     private var groundImpactTime: Double = Double.MAX_VALUE
@@ -196,58 +189,6 @@ class GroundProximityComputer(computers: ComputerBus) : Computer(computers) {
         }
 
         return computers.data.position.distanceTo(result.location) / velocity.length()
-    }
-
-    override fun <Response> handleQuery(query: ComputerQuery<Response>) {
-        if (query is ThrustComputer.TargetThrustQuery) {
-            if (computers.data.pitch > 15.0f) {
-                return
-            }
-            val sinkRateInputStatus = getControlInputStatus(groundImpactStatus, FAConfig.safety.sinkRateAutoThrust, true)
-            val terrainInputStatus = getControlInputStatus(obstacleImpactStatus, FAConfig.safety.obstacleAutoThrust, true)
-            if (sinkRateInputStatus != null || terrainInputStatus != null) {
-                query.respond(ControlInput(
-                    0.0f,
-                    Component.translatable("mode.flightassistant.thrust.idle"),
-                    ControlInput.Priority.HIGH,
-                    status = ControlInput.Status.highest(sinkRateInputStatus, terrainInputStatus)
-                ))
-            }
-        }
-
-        if (query is PitchComputer.TargetPitchQuery) {
-            val sinkRateInputStatus = getControlInputStatus(groundImpactStatus, FAConfig.safety.sinkRateAutoPitch, false)
-            val terrainInputStatus = getControlInputStatus(obstacleImpactStatus, FAConfig.safety.obstacleAutoPitch, false)
-            if (sinkRateInputStatus != null || terrainInputStatus != null) {
-                val deltaTimeMultiplier: Double = max(1.0, inverseMin(groundImpactTime, obstacleImpactTime) ?: return)
-                query.respond(ControlInput(
-                    90.0f,
-                    Component.translatable("mode.flightassistant.vertical.terrain_escape"),
-                    ControlInput.Priority.HIGH,
-                    deltaTimeMultiplier.toFloat(),
-                    ControlInput.Status.highest(sinkRateInputStatus, terrainInputStatus)
-                ))
-            }
-        }
-
-        if (query is PitchComputer.MinimumPitchQuery) {
-            if (groundImpactStatus <= Status.WARNING && FAConfig.safety.sinkRateLimitPitch || obstacleImpactStatus <= Status.WARNING && FAConfig.safety.obstacleLimitPitch) {
-                query.respond(ControlInput(
-                    computers.data.pitch.coerceAtMost(15.0f),
-                    Component.translatable("mode.flightassistant.vertical.terrain_protection"),
-                    ControlInput.Priority.HIGH
-                ))
-            }
-        }
-    }
-
-    private fun getControlInputStatus(status: Status, config: Boolean, forThrust: Boolean): ControlInput.Status? {
-        if (!config) return ControlInput.Status.DISABLED
-        val armThreshold = if (forThrust) Status.CAUTION else Status.WARNING
-        val activeThreshold = if (forThrust) Status.WARNING else Status.RECOVER
-        return if (status <= activeThreshold) ControlInput.Status.ACTIVE
-        else if (status <= armThreshold) ControlInput.Status.ARMED
-        else null
     }
 
     override fun reset() {

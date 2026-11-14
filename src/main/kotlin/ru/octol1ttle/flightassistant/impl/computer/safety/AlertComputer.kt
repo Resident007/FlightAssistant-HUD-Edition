@@ -19,21 +19,12 @@ import ru.octol1ttle.flightassistant.api.util.extensions.getHighestPriority
 import ru.octol1ttle.flightassistant.api.util.extensions.pause
 import ru.octol1ttle.flightassistant.api.util.extensions.unpause
 import ru.octol1ttle.flightassistant.impl.alert.AlertSoundInstance
-import ru.octol1ttle.flightassistant.impl.alert.autoflight.AutoThrustOffAlert
-import ru.octol1ttle.flightassistant.impl.alert.autoflight.AutopilotOffAlert
 import ru.octol1ttle.flightassistant.impl.alert.elytra.ElytraDurabilityCriticalAlert
 import ru.octol1ttle.flightassistant.impl.alert.elytra.ElytraDurabilityLowAlert
 import ru.octol1ttle.flightassistant.impl.alert.fault.DisplayFaultAlert
 import ru.octol1ttle.flightassistant.impl.alert.fault.computer.AlertComputerFaultAlert
 import ru.octol1ttle.flightassistant.impl.alert.fault.computer.ComputerFaultAlert
 import ru.octol1ttle.flightassistant.impl.alert.firework.FireworkExplosiveAlert
-import ru.octol1ttle.flightassistant.impl.alert.firework.FireworkNoResponseAlert
-import ru.octol1ttle.flightassistant.impl.alert.firework.FireworkSlowResponseAlert
-import ru.octol1ttle.flightassistant.impl.alert.flight_controls.ProtectionsLostAlert
-import ru.octol1ttle.flightassistant.impl.alert.flight_plan.ArrivalElevationDisagreeAlert
-import ru.octol1ttle.flightassistant.impl.alert.flight_plan.DepartureElevationDisagreeAlert
-import ru.octol1ttle.flightassistant.impl.alert.flight_plan.DescentTooSteepAlert
-import ru.octol1ttle.flightassistant.impl.alert.flight_plan.ObstaclesOnPathAlert
 import ru.octol1ttle.flightassistant.impl.alert.gpws.*
 import ru.octol1ttle.flightassistant.impl.alert.navigation.ApproachingVoidDamageAltitudeAlert
 import ru.octol1ttle.flightassistant.impl.alert.navigation.NoChunksLoadedAlert
@@ -41,16 +32,6 @@ import ru.octol1ttle.flightassistant.impl.alert.navigation.ReachedVoidDamageAlti
 import ru.octol1ttle.flightassistant.impl.alert.navigation.SlowChunkLoadingAlert
 import ru.octol1ttle.flightassistant.impl.alert.stall.ApproachingStallAlert
 import ru.octol1ttle.flightassistant.impl.alert.stall.FullStallAlert
-import ru.octol1ttle.flightassistant.impl.alert.thrust.NoThrustSourceAlert
-import ru.octol1ttle.flightassistant.impl.alert.thrust.ReverseThrustNotSupportedAlert
-import ru.octol1ttle.flightassistant.impl.alert.thrust.ThrustLockedAlert
-import ru.octol1ttle.flightassistant.impl.computer.autoflight.AutoFlightComputer
-import ru.octol1ttle.flightassistant.impl.computer.autoflight.FireworkComputer
-import ru.octol1ttle.flightassistant.impl.computer.autoflight.FlightPlanComputer
-import ru.octol1ttle.flightassistant.impl.computer.autoflight.base.HeadingComputer
-import ru.octol1ttle.flightassistant.impl.computer.autoflight.base.PitchComputer
-import ru.octol1ttle.flightassistant.impl.computer.autoflight.base.RollComputer
-import ru.octol1ttle.flightassistant.impl.computer.autoflight.base.ThrustComputer
 import ru.octol1ttle.flightassistant.impl.computer.data.AirDataComputer
 import ru.octol1ttle.flightassistant.impl.computer.data.HudDisplayDataComputer
 import ru.octol1ttle.flightassistant.impl.display.HudDisplayHost
@@ -72,15 +53,6 @@ class AlertComputer(computers: ComputerBus, private val soundManager: SoundManag
                 .add(AlertComputerFaultAlert(computers))
         )
         register(
-            AlertCategory(Component.translatable("alert.flightassistant.autoflight"))
-                .add(ComputerFaultAlert(computers, AutoFlightComputer.ID, Component.translatable("alert.flightassistant.autoflight.fault")))
-                .add(ComputerFaultAlert(computers, PitchComputer.ID, Component.translatable("alert.flightassistant.autoflight.pitch_fault")))
-                .add(ComputerFaultAlert(computers, HeadingComputer.ID, Component.translatable("alert.flightassistant.autoflight.heading_fault")))
-                .add(ComputerFaultAlert(computers, RollComputer.ID, Component.translatable("alert.flightassistant.autoflight.roll_fault")))
-                .add(AutopilotOffAlert(computers))
-                .add(AutoThrustOffAlert(computers))
-        )
-        register(
             AlertCategory(Component.translatable("alert.flightassistant.elytra"))
                 .add(ComputerFaultAlert(computers, ElytraStatusComputer.ID, Component.translatable("alert.flightassistant.elytra.fault")))
                 .add(ElytraDurabilityCriticalAlert(computers))
@@ -93,39 +65,15 @@ class AlertComputer(computers: ComputerBus, private val soundManager: SoundManag
         )
         register(
             AlertCategory(Component.translatable("alert.flightassistant.firework"))
-                .add(ComputerFaultAlert(computers, FireworkComputer.ID, Component.translatable("alert.flightassistant.firework.fault")))
                 .add(FireworkExplosiveAlert(computers, InteractionHand.MAIN_HAND))
                 .add(FireworkExplosiveAlert(computers, InteractionHand.OFF_HAND))
-                .add(FireworkNoResponseAlert(computers))
-                .add(FireworkSlowResponseAlert(computers))
-        )
-        register(
-            AlertCategory(Component.translatable("alert.flightassistant.flight_controls"))
-                .add(
-                    ComputerFaultAlert(
-                        computers, PitchComputer.ID, Component.translatable("alert.flightassistant.flight_controls.pitch_fault"), listOf(
-                            Component.translatable("alert.flightassistant.flight_controls.pitch_fault.use_automation_override"),
-                )))
-                .add(ProtectionsLostAlert(computers))
-        )
-        register(
-            AlertCategory(Component.translatable("alert.flightassistant.flight_plan"))
-                .add(ComputerFaultAlert(computers, FlightPlanComputer.ID, Component.translatable("alert.flightassistant.flight_plan.fault")))
-                .add(ArrivalElevationDisagreeAlert(computers))
-                .add(DepartureElevationDisagreeAlert(computers))
-                .add(ObstaclesOnPathAlert(computers))
-                .add(DescentTooSteepAlert(computers))
         )
         register(
             AlertCategory(Component.translatable("alert.flightassistant.gpws"))
                 .add(ComputerFaultAlert(computers, GroundProximityComputer.ID, Component.translatable("alert.flightassistant.gpws.fault")))
                 .add(PullUpAlert(computers))
-                .add(BelowGlideSlopeWarningAlert(computers))
                 .add(SinkRateAlert(computers))
                 .add(TerrainAheadAlert(computers))
-                .add(BelowGlideSlopeAlert(computers))
-                .add(DontSinkAlert(computers))
-                .add(MinimumsReachedAlert(computers))
         )
         register(
             AlertCategory(Component.translatable("alert.flightassistant.navigation"))
@@ -142,13 +90,6 @@ class AlertComputer(computers: ComputerBus, private val soundManager: SoundManag
                 .add(ComputerFaultAlert(computers, StallComputer.ID, Component.translatable("alert.flightassistant.stall.detection_fault")))
                 .add(FullStallAlert(computers))
                 .add(ApproachingStallAlert(computers))
-        )
-        register(
-            AlertCategory(Component.translatable("alert.flightassistant.thrust"))
-                .add(ComputerFaultAlert(computers, ThrustComputer.ID, Component.translatable("alert.flightassistant.thrust.fault")))
-                .add(ThrustLockedAlert(computers))
-                .add(NoThrustSourceAlert(computers))
-                .add(ReverseThrustNotSupportedAlert(computers))
         )
     }
 

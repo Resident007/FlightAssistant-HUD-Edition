@@ -9,13 +9,6 @@ import ru.octol1ttle.flightassistant.api.ModuleController
 import ru.octol1ttle.flightassistant.api.computer.*
 import ru.octol1ttle.flightassistant.api.util.FATickCounter
 import ru.octol1ttle.flightassistant.config.FAConfig
-import ru.octol1ttle.flightassistant.impl.computer.autoflight.AutoFlightComputer
-import ru.octol1ttle.flightassistant.impl.computer.autoflight.FireworkComputer
-import ru.octol1ttle.flightassistant.impl.computer.autoflight.FlightPlanComputer
-import ru.octol1ttle.flightassistant.impl.computer.autoflight.base.HeadingComputer
-import ru.octol1ttle.flightassistant.impl.computer.autoflight.base.PitchComputer
-import ru.octol1ttle.flightassistant.impl.computer.autoflight.base.RollComputer
-import ru.octol1ttle.flightassistant.impl.computer.autoflight.base.ThrustComputer
 import ru.octol1ttle.flightassistant.impl.computer.data.AirDataComputer
 import ru.octol1ttle.flightassistant.impl.computer.data.HudDisplayDataComputer
 import ru.octol1ttle.flightassistant.impl.computer.safety.*
@@ -71,21 +64,12 @@ internal object ComputerHost : ModuleController<Computer>, ComputerBus {
     private fun registerBuiltin() {
         register(AirDataComputer.ID, AirDataComputer(this, mc))
         register(HudDisplayDataComputer.ID, HudDisplayDataComputer(this, mc))
-        register(FlightProtectionsComputer.ID, FlightProtectionsComputer(this))
 
         register(StallComputer.ID, StallComputer(this))
         register(VoidProximityComputer.ID, VoidProximityComputer(this))
         register(GroundProximityComputer.ID, GroundProximityComputer(this))
         register(ElytraStatusComputer.ID, ElytraStatusComputer(this))
         register(ChunkStatusComputer.ID, ChunkStatusComputer(this))
-
-        register(FlightPlanComputer.ID, FlightPlanComputer(this))
-        register(AutoFlightComputer.ID, AutoFlightComputer(this))
-        register(FireworkComputer.ID, FireworkComputer(this, mc))
-        register(PitchComputer.ID, PitchComputer(this))
-        register(HeadingComputer.ID, HeadingComputer(this))
-        register(RollComputer.ID, RollComputer(this))
-        register(ThrustComputer.ID, ThrustComputer(this))
 
         register(AlertComputer.ID, AlertComputer(this, mc.soundManager))
     }

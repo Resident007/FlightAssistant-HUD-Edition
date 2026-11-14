@@ -42,7 +42,7 @@ tasks.withType<Jar> {
 
 java {
     withSourcesJar()
-    toolchain.languageVersion = JavaLanguageVersion.of(25)
+    toolchain.languageVersion = JavaLanguageVersion.of(27)
 }
 
 tasks.withType<JavaCompile>().configureEach {
@@ -50,7 +50,7 @@ tasks.withType<JavaCompile>().configureEach {
 }
 
 kotlin {
-    jvmToolchain(25)
+    jvmToolchain(27)
 }
 
 loom {
